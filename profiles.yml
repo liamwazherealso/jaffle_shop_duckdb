@@ -1,8 +1,18 @@
 jaffle_shop:
 
-  target: dev
+  target: ducklake
   outputs:
     dev:
       type: duckdb
       path: 'jaffle_shop.duckdb'
-      threads: 24
+    ducklake:
+      type: duckdb
+      path: 'jaffle_shop.duckdb'
+      extensions:
+        - ducklake
+      attach:
+        - path: ducklake:metadata.ducklake
+          alias: ducklake
+          options:
+            data_path: s3://my-s3-bucket
+      threads: 1
